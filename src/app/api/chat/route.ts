@@ -7,7 +7,6 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   const { messages }: { messages: Message[] } = await req.json();
-
   const result = streamText({
     model: openai('gpt-4o'),
     messages,
@@ -15,17 +14,12 @@ export async function POST(req: Request) {
       console.error(error);
     },
     onFinish: async (result) => {
-      const sessionId = await api.sessions.createSession();
-      console.log(sessionId);
-      if (!sessionId) {
-        throw new Error("Session ID is undefined");
-      }
-      const messageId = await api.messages.storeMessage({
-        sessionId,
-        role: "assistant",
-        content: result.text,
-      });
-      console.log(messageId);
+      // const messageId = await api.messages.storeMessage({
+      //   sessionId,
+      //   role: "assistant",
+      //   content: result.text,
+      // });
+      // console.log(messageId);
     },
   });
 

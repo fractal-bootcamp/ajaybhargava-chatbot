@@ -28,7 +28,7 @@ export const messagesRouter = createTRPCRouter({
       sessionId: input.sessionId,
       role: input.role,
       content: input.content,
-    });
+    }).returning();
     return message;
   }),
 });
