@@ -2,8 +2,9 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-
 import { TRPCReactProvider } from "~/trpc/react";
+import { SidebarProvider } from "~/components/ui/sidebar";
+import { AppSidebar } from "./_components/appbar";
 
 export const metadata: Metadata = {
 	title: "Ajay's Chatbot",
@@ -17,7 +18,10 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={`${GeistSans.variable}`}>
 			<body>
-				<TRPCReactProvider>{children}</TRPCReactProvider>
+				<SidebarProvider>
+					<AppSidebar />
+					<TRPCReactProvider>{children}</TRPCReactProvider>
+				</SidebarProvider>
 			</body>
 		</html>
 	);
