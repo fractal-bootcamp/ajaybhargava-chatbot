@@ -1,38 +1,7 @@
-"use client";
+import { redirect } from "next/navigation";
+import { randomUUID } from "node:crypto";
 
-import { useChat } from "@ai-sdk/react";
-
-export default function Page() {
-	const { messages, input, handleInputChange, handleSubmit, status, stop } =
-		useChat({});
-
-	return (
-		<>
-			{messages.map((message) => (
-				<div key={message.id}>
-					{message.role === "user" ? "User: " : "AI: "}
-					{message.content}
-				</div>
-			))}
-
-			{(status === "submitted" || status === "streaming") && (
-				<div>
-					{status === "submitted"}
-					<button type="button" onClick={() => stop()}>
-						Stop
-					</button>
-				</div>
-			)}
-
-			<form onSubmit={handleSubmit}>
-				<input
-					name="prompt"
-					value={input}
-					onChange={handleInputChange}
-					disabled={status !== "ready"}
-				/>
-				<button type="submit">Submit</button>
-			</form>
-		</>
-	);
+export default async function Page() {
+	const id = randomUUID();
+	redirect(`/chat/${id}`);
 }

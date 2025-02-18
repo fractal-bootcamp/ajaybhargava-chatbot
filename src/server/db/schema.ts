@@ -4,7 +4,6 @@ import {
   text,
   jsonb,
   timestamp,
-  integer,
 } from "drizzle-orm/pg-core";
 
 export const sessions = pgTable("sessions", {
