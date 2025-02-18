@@ -19,7 +19,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const handleMouseLeave = useCallback(() => {
 		closeTimeoutRef.current = setTimeout(() => {
 			setOpen(false);
-		}, 400); // 300ms delay before closing
+		}, 400);
 	}, [setOpen]);
 
 	const handleMouseEnter = useCallback(() => {
