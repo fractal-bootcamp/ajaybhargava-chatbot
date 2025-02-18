@@ -1,7 +1,3 @@
-// Example model schema from the Drizzle docs
-// https://orm.drizzle.team/docs/sql-schema-declaration
-
-import { sql } from "drizzle-orm";
 import {
   pgTable,
   uuid,
@@ -11,11 +7,18 @@ import {
   integer,
 } from "drizzle-orm/pg-core";
 
+export const sessions = pgTable("sessions", {
+  id: uuid("id").primaryKey(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
 
 export const chatbotMessages = pgTable(
   "messages",
   {
     id: uuid("id").primaryKey(),
+    sessionId: uuid("session_id")
+      .references(() => sessions.id)
+      .notNull(),
     role: text("role").notNull(), 
     content: text("content").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
@@ -24,7 +27,7 @@ export const chatbotMessages = pgTable(
 
 export const toolInvocations = pgTable("tool_invocations", {
   id: uuid('id').primaryKey(),
-  messageId: integer('message_id')
+  messageId: uuid('message_id')
     .references(() => chatbotMessages.id)
     .notNull(),
   toolName: text('tool_name').notNull(),
@@ -36,7 +39,7 @@ export const toolInvocations = pgTable("tool_invocations", {
 
 export const uiComponents = pgTable("ui_components", {
   id: uuid("id").primaryKey(),
-  messageId: integer("message_id")
+  messageId: uuid("message_id")
     .references(() => chatbotMessages.id)
     .notNull(),
   componentType: text("component_type").notNull(),
@@ -44,6 +47,7 @@ export const uiComponents = pgTable("ui_components", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export type Session = typeof sessions.$inferSelect;
 export type ChatbotMessage = typeof chatbotMessages.$inferSelect;
 export type ToolInvocation = typeof toolInvocations.$inferSelect;
 export type UIComponent = typeof uiComponents.$inferSelect;
