@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useMemo } from "react";
+import type React from "react";
+import { useMemo } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Code2, Loader2, Terminal } from "lucide-react";
 
