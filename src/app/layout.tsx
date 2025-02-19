@@ -2,8 +2,8 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-import { api, TRPCReactProvider } from "~/trpc/react";
-import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
+import { TRPCReactProvider } from "~/trpc/react";
+import { SidebarProvider } from "~/components/ui/sidebar";
 import { AppSidebarWrapper } from "./_components/bar";
 
 export const metadata: Metadata = {

@@ -172,7 +172,7 @@ function ToolCall({
 
 	return (
 		<div className="flex flex-col items-start gap-2">
-			{toolInvocations.map((invocation, index) => {
+			{toolInvocations.map((invocation) => {
 				switch (invocation.state) {
 					case "partial-call":
 					case "call":

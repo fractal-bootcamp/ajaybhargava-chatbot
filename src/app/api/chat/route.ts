@@ -5,6 +5,11 @@ import { api } from '~/trpc/server';
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
+// Add type for the newSession response
+interface SessionResponse {
+  id: string;
+}
+
 /**
  * Retrieves an existing session ID or creates a new one if it doesn't exist.
  * 
@@ -28,7 +33,7 @@ async function getOrCreateSessionId(id: string): Promise<string> {
 
   const newSession = await api.sessions.newSession({
     sessionId: id,
-  });
+  }) as SessionResponse[];
   
   if (!newSession?.[0]?.id) {
     throw new Error("Failed to create session");
