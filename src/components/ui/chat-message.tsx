@@ -70,7 +70,7 @@ interface ToolCall {
 interface ToolResult {
 	state: "result";
 	toolName: string;
-	result: any;
+	result: unknown;
 }
 
 type ToolInvocation = PartialToolCall | ToolCall | ToolResult;
@@ -125,8 +125,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 		<div className={cn("flex flex-col", isUser ? "items-end" : "items-start")}>
 			{files ? (
 				<div className="mb-1 flex flex-wrap gap-2">
-					{files.map((file, index) => {
-						return <FilePreview file={file} key={index} />;
+					{files.map((file) => {
+						return <FilePreview file={file} key={file.name} />;
 					})}
 				</div>
 			) : null}
@@ -178,7 +178,7 @@ function ToolCall({
 					case "call":
 						return (
 							<div
-								key={index}
+								key={invocation.toolName}
 								className="flex items-center gap-2 rounded-lg border bg-muted px-3 py-2 text-sm text-muted-foreground"
 							>
 								<Terminal className="h-4 w-4" />
@@ -189,7 +189,7 @@ function ToolCall({
 					case "result":
 						return (
 							<div
-								key={index}
+								key={invocation.toolName}
 								className="flex flex-col gap-1.5 rounded-lg border bg-muted px-3 py-2 text-sm"
 							>
 								<div className="flex items-center gap-2 text-muted-foreground">

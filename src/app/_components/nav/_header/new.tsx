@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Plus } from "lucide-react";
 import { ShinyButton } from "~/components/magicui/shiny-button";
 
 export function NewChatButton() {
