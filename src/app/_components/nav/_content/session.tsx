@@ -4,19 +4,7 @@ import { MoreVertical } from "lucide-react";
 import { SidebarContent } from "~/components/ui/sidebar";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-} from "~/components/ui/dialog";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "~/components/ui/select";
+import { ActionDialog } from "./dialog";
 
 interface SessionItemProps {
 	id: string;
@@ -41,9 +29,9 @@ export function SessionItem({
 
 	const handleAction = (value: string) => {
 		if (value === "delete") {
-			// Add delete handler
+			// Put a Delete Handler Here
 		} else if (value === "fork") {
-			// Add fork handler
+			// Put a Fork Handler Here
 		}
 		setShowDialog(false);
 	};
@@ -68,22 +56,11 @@ export function SessionItem({
 					>
 						<MoreVertical className="px-1 side-4" />
 					</button>
-					<Dialog open={showDialog} onOpenChange={setShowDialog}>
-						<DialogContent className="sm:max-w-[425px]">
-							<DialogHeader>
-								<DialogTitle>Choose Action</DialogTitle>
-							</DialogHeader>
-							<Select onValueChange={handleAction}>
-								<SelectTrigger className="w-full">
-									<SelectValue placeholder="Select an action" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectItem value="delete">Delete</SelectItem>
-									<SelectItem value="fork">Fork</SelectItem>
-								</SelectContent>
-							</Select>
-						</DialogContent>
-					</Dialog>
+					<ActionDialog
+						showDialog={showDialog}
+						setShowDialog={setShowDialog}
+						handleAction={handleAction}
+					/>
 				</div>
 			</div>
 		</SidebarContent>
