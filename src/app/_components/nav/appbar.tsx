@@ -1,9 +1,7 @@
 "use client";
 
 import type * as React from "react";
-import { useCallback, useRef } from "react";
-import { SessionItem } from "./session";
-
+import { NewChatButton } from "./_header/new";
 import {
 	Sidebar,
 	SidebarFooter,
@@ -13,6 +11,7 @@ import {
 	useSidebar,
 } from "~/components/ui/sidebar";
 import type { Session } from "~/server/db/schema";
+import { groupSessionsByDate, renderSessionGroup } from "./_content/groups";
 
 export function AppSidebar({
 	sessions,
@@ -21,21 +20,17 @@ export function AppSidebar({
 	sessions: Session[];
 }) {
 	const { setOpen, open } = useSidebar();
+	const groupedSessions = groupSessionsByDate(sessions);
 
 	return (
 		<Sidebar {...props}>
-			<SidebarHeader />
+			<SidebarHeader>
+				<NewChatButton />
+			</SidebarHeader>
 			<SidebarGroup>
-				{sessions.map((session, index) => (
-					<SessionItem
-						key={session.id}
-						id={session.id}
-						name={session.name}
-						collapsedLabel={`${index + 1}`}
-						setOpen={setOpen}
-						isOpen={open}
-					/>
-				))}
+				{Object.entries(groupedSessions).map((group) =>
+					renderSessionGroup(group, setOpen, open),
+				)}
 			</SidebarGroup>
 			<SidebarFooter />
 			<SidebarRail />
