@@ -4,6 +4,7 @@ import {
   text,
   jsonb,
   timestamp,
+  varchar,
 } from "drizzle-orm/pg-core";
 
 export const sessions = pgTable("sessions", {
@@ -15,7 +16,7 @@ export const sessions = pgTable("sessions", {
 export const chatbotMessages = pgTable(
   "messages",
   {
-    id: uuid("id").primaryKey(),
+    id: varchar("id", { length: 255 }).primaryKey(),
     sessionId: uuid("session_id")
       .references(() => sessions.id)
       .notNull(),
@@ -26,8 +27,8 @@ export const chatbotMessages = pgTable(
 );
 
 export const toolInvocations = pgTable("tool_invocations", {
-  id: uuid('id').primaryKey(),
-  messageId: uuid('message_id')
+  id: varchar('id', { length: 255 }).primaryKey(),
+  messageId: varchar('message_id', { length: 255 })
     .references(() => chatbotMessages.id)
     .notNull(),
   toolName: text('tool_name').notNull(),
@@ -38,8 +39,8 @@ export const toolInvocations = pgTable("tool_invocations", {
 });
 
 export const uiComponents = pgTable("ui_components", {
-  id: uuid("id").primaryKey(),
-  messageId: uuid("message_id")
+  id: varchar("id", { length: 255 }).primaryKey(),
+  messageId: varchar("message_id")
     .references(() => chatbotMessages.id)
     .notNull(),
   componentType: text("component_type").notNull(),

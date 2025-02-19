@@ -1,1 +1,0 @@
-ALTER TABLE "sessions" ALTER COLUMN "name" SET DEFAULT 'New Chat';
