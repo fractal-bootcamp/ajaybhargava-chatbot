@@ -8,6 +8,7 @@ import {
 
 export const sessions = pgTable("sessions", {
   id: uuid("id").primaryKey(),
+  name: text("name").default("New Chat"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
