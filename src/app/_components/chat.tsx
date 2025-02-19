@@ -2,10 +2,12 @@
 
 import { useChat } from "@ai-sdk/react";
 import { Chat } from "~/components/ui/chat";
+import type { Message } from "ai";
 
-export function ChatDemo(props: { id: string }) {
+export function ChatDemo(props: { id: string; initialMessages: Message[] }) {
 	const { messages, input, handleInputChange, handleSubmit, stop } = useChat({
 		id: props.id,
+		initialMessages: props.initialMessages,
 		sendExtraMessageFields: true,
 	});
 

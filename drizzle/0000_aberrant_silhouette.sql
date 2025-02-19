@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "messages" (
-	"id" uuid PRIMARY KEY NOT NULL,
+	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"session_id" uuid NOT NULL,
 	"role" text NOT NULL,
 	"content" text NOT NULL,
@@ -8,12 +8,13 @@ CREATE TABLE IF NOT EXISTS "messages" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "sessions" (
 	"id" uuid PRIMARY KEY NOT NULL,
+	"name" text DEFAULT 'New Chat',
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "tool_invocations" (
-	"id" uuid PRIMARY KEY NOT NULL,
-	"message_id" uuid NOT NULL,
+	"id" varchar(255) PRIMARY KEY NOT NULL,
+	"message_id" varchar(255) NOT NULL,
 	"tool_name" text NOT NULL,
 	"args" jsonb,
 	"result" jsonb,
@@ -22,8 +23,8 @@ CREATE TABLE IF NOT EXISTS "tool_invocations" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "ui_components" (
-	"id" uuid PRIMARY KEY NOT NULL,
-	"message_id" uuid NOT NULL,
+	"id" varchar(255) PRIMARY KEY NOT NULL,
+	"message_id" varchar NOT NULL,
 	"component_type" text NOT NULL,
 	"component_props" jsonb,
 	"created_at" timestamp DEFAULT now() NOT NULL

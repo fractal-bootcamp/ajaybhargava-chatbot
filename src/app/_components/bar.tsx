@@ -19,6 +19,9 @@ export async function AppSidebarWrapper(
 						sessionId: session.id,
 						orderBy: "desc",
 					});
+					if (messages.length < 5) {
+						return;
+					}
 					const summary = await generateText({
 						model: openai("gpt-4o-mini"),
 						prompt: `Summarize the following messages into a title no more than 5 words and do not use quotation marks to enclose the title: ${messages.map((message) => message.content).join("\n")}`,

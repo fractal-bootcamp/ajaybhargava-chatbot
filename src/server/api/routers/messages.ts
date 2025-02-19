@@ -43,16 +43,27 @@ export const messagesRouter = createTRPCRouter({
    * It captures essential details like the sender's role and the message content.
    */
   storeMessage: publicProcedure.input(z.object({
+    id: z.string(),
     sessionId: z.string(),
     role: z.enum(["user", "assistant"]),
     content: z.string(),
   })).mutation(async ({ ctx, input }) => {
-    const message = await ctx.db.insert(chatbotMessages).values({
-      id: crypto.randomUUID(),
-      sessionId: input.sessionId,
-      role: input.role,
-      content: input.content,
-    }).returning();
+    const message = await ctx.db.insert(chatbotMessages)
+      .values({
+        id: input.id,
+        sessionId: input.sessionId,
+        role: input.role,
+        content: input.content,
+      })
+      .onConflictDoUpdate({
+        target: chatbotMessages.id,
+        set: {
+          content: input.content,
+          role: input.role,
+          sessionId: input.sessionId,
+        }
+      })
+      .returning();
     return message;
   }),
 });

@@ -1,1 +1,0 @@
-ALTER TABLE "sessions" ALTER COLUMN "name" DROP NOT NULL;

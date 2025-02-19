@@ -1,5 +1,5 @@
 {
-  "id": "149e8a53-4368-4f17-8621-44c8b28d2aac",
+  "id": "6e75528f-9bf3-41ba-93a9-0cef880a9760",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,7 +10,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "varchar(255)",
           "primaryKey": true,
           "notNull": true
         },
@@ -69,6 +69,13 @@
           "primaryKey": true,
           "notNull": true
         },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'New Chat'"
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp with time zone",
@@ -88,13 +95,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "varchar(255)",
           "primaryKey": true,
           "notNull": true
         },
         "message_id": {
           "name": "message_id",
-          "type": "uuid",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
@@ -155,13 +162,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "varchar(255)",
           "primaryKey": true,
           "notNull": true
         },
         "message_id": {
           "name": "message_id",
-          "type": "uuid",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": true
         },
