@@ -48,13 +48,13 @@ export function SessionItem({
 				>
 					{isOpen ? name : collapsedLabel}
 				</button>
-				<div className="relative">
+				<div className="relative p-2">
 					<button
 						type="button"
-						className="p-4 hover:bg-gray-200 rounded"
+						className="p-2 hover:bg-gray-200 rounded appearance-none bg-transparent"
 						onClick={() => setShowDialog(true)}
 					>
-						<MoreVertical className="px-1 side-4" />
+						<MoreVertical className="px-1" />
 					</button>
 					<ActionDialog
 						showDialog={showDialog}

@@ -20,17 +20,18 @@ export async function AppSidebarWrapper(
 						orderBy: "desc",
 					});
 					if (messages.length < 5) {
-						return;
+						return null;
 					}
 					const summary = await generateText({
 						model: openai("gpt-4o-mini"),
-						prompt: `Summarize the following messages into a title no more than 5 words and do not use quotation marks to enclose the title: ${messages.map((message) => message.content).join("\n")}`,
+						prompt: `Summarize the following messages into a title no more than 3 words and do not use quotation marks to enclose the title: ${messages.map((message) => message.content).join("\n")}`,
 					});
-					await api.sessions.updateSessionSummary({
+					return api.sessions.updateSessionSummary({
 						sessionId: session.id,
 						summary: summary.text,
 					});
-				}),
+				})
+				.filter(Boolean),
 		);
 	});
 
