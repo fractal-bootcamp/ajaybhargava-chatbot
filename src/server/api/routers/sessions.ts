@@ -19,7 +19,7 @@ export const sessionsRouter = createTRPCRouter({
   })).mutation(async ({ ctx, input }) => {
     const session = await ctx.db.insert(sessions).values({
       id: input.sessionId,
-    }).returning();
+    }).returning().onConflictDoNothing();
     return session;
   }),
 
