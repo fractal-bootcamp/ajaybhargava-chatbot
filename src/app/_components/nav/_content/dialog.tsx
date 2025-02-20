@@ -31,7 +31,6 @@ export function ActionDialog({
 					</SelectTrigger>
 					<SelectContent>
 						<SelectItem value="delete">Delete</SelectItem>
-						<SelectItem value="fork">Fork</SelectItem>
 					</SelectContent>
 				</Select>
 			</DialogContent>

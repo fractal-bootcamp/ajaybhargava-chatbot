@@ -5,6 +5,7 @@ import { SidebarContent } from "~/components/ui/sidebar";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ActionDialog } from "./dialog";
+import { deleteSession } from "../../core/actions/deleteSession";
 
 interface SessionItemProps {
 	id: string;
@@ -29,9 +30,7 @@ export function SessionItem({
 
 	const handleAction = (value: string) => {
 		if (value === "delete") {
-			// Put a Delete Handler Here
-		} else if (value === "fork") {
-			// Put a Fork Handler Here
+			deleteSession(id);
 		}
 		setShowDialog(false);
 	};
